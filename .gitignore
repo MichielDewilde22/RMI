@@ -1,8 +1,5 @@
-workspace.xml
-
+.idea\workspace.xml
 pom.xml
-
-
 # Compiled class file
 *.class
 

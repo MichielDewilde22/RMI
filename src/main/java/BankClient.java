@@ -7,15 +7,19 @@ public class BankClient {
     public static void main(String[] args) {
 
         String command = (args.length < 1) ? null : args[0];
-        String am = (args.length < 1) ? null : args[1];
-        int amount = Integer.parseInt(am);
+        String am;
+        int amount = 0;
+        if (args.length > 1) {
+            am = (args.length < 1) ? null : args[1];
+            amount = Integer.parseInt(am);
+        }
 
 
         switch(command.toLowerCase()) {
             case "add":     {
                                 try {
                                     Registry registry = LocateRegistry.getRegistry("192.168.1.1", 1099);
-                                    Bank stub = (Bank) registry.lookup("addMoney");
+                                    Bank stub = (Bank) registry.lookup("Bank");
                                     String response = stub.addMoney(amount);
                                     System.out.println("response: " + response);
                                 } catch (Exception e) {
@@ -27,7 +31,7 @@ public class BankClient {
             case "withdraw":{
                                 try {
                                     Registry registry = LocateRegistry.getRegistry("192.168.1.1", 1099);
-                                    Bank stub = (Bank) registry.lookup("withdrawMoney");
+                                    Bank stub = (Bank) registry.lookup("Bank");
                                     String response = stub.withdrawMoney(amount);
                                     System.out.println("response: " + response);
                                 } catch (Exception e) {
@@ -39,7 +43,7 @@ public class BankClient {
             case "balance":{
                                 try {
                                     Registry registry = LocateRegistry.getRegistry("192.168.1.1", 1099);
-                                    Bank stub = (Bank) registry.lookup("balance");
+                                    Bank stub = (Bank) registry.lookup("Bank");
                                     String response = stub.balance();
                                     System.out.println("response: " + response);
                                 } catch (Exception e) {
